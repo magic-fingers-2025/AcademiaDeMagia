@@ -1,3 +1,3 @@
 # AcademiaDeMagia
 
-## ¡Estás en la rama **development**!
+## ¡Estás en la rama **dev**!
