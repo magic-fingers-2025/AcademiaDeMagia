@@ -1,0 +1,7 @@
+import academia.*
+import magos.*
+describe "academina" {
+    test "test 1" {
+        assert.that(true)
+    }
+}

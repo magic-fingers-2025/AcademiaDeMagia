@@ -1,0 +1,4 @@
+import magos.*
+object academina {
+
+}
