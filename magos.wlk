@@ -1,3 +1,10 @@
+
+/*
+atributos: energia, poder, habilidadEspecial, horasDeEntrenamiento,  salud
+
+métodos: entrenar, 
+
+*/
 object selene {
 }
 
