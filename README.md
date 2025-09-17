@@ -1,2 +1,3 @@
 # AcademiaDeMagia
-Repositorio de la organización para trabajar por ramas
+
+## ¡Estás en la rama **development**!
