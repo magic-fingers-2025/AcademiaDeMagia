@@ -9,7 +9,7 @@ object selene {
 }
 
 
-object balthazar {
+object balthazar  {
 }
 
 object iris {
