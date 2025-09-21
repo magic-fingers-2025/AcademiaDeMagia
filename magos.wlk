@@ -14,7 +14,7 @@ object selene {
    method energia() =energia 
    method alternarHabilidad() {
     luzLunar = !luzLunar
-}
+} 
    method entrenar() {
     if (self.habilidadActivada()){
         poder =  poder *2
