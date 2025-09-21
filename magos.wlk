@@ -65,7 +65,7 @@ object escudoMagicoDeArcana {
    var durabilidad = 600
       
    method mejorar(resistenciaExtra, durabilidadExtra) {
-   //toma los valores iniciales y suma los que agregamos por usar sanacion
+   //toma los valores iniciales y suma los que agregamos por usar la sanacion
       resistencia = resistencia + resistenciaExtra
       durabilidad = durabilidad + durabilidadExtra
       // su durabilidad no puese ser mas que 1000
