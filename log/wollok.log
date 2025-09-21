@@ -556,3 +556,5 @@
 {"level":"info","message":"⌛ Validating magos.wlk","timeElapsed":102,"timestamp":"2025-09-21T18:12:25.798Z"}
 {"level":"info","message":"⌛ Validating magos.wlk","timeElapsed":102,"timestamp":"2025-09-21T18:12:26.297Z"}
 {"level":"info","message":"⌛ Validating magos.wlk","timeElapsed":108,"timestamp":"2025-09-21T18:12:29.432Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":300,"timestamp":"2025-09-21T20:46:05.248Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":167,"timestamp":"2025-09-21T20:46:05.418Z"}
