@@ -6,6 +6,8 @@ métodos: entrenar,
 
 */
 object selene {
+
+   var falopa = 0
 }
 
 
