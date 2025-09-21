@@ -5,11 +5,12 @@ atributos: energia, poder, habilidadEspecial, horasDeEntrenamiento,  salud
 métodos: entrenar, 
 
 */
+
 object selene {
    var energia=35
    var poder = 60 
    var luzLunar= false  
-   method habilidadActivada() =luzLunar
+   method habilidadActivada() =luzLunar // se agrega comentario
    method poder() =poder 
    method energia() =energia 
    method alternarHabilidad() {
