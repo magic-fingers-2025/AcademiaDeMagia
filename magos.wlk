@@ -60,7 +60,7 @@ object iris {
    
 }
 object escudoMagicoDeArcana {
-   //estos son los valores basicos del escudo
+   //estos son los valores basicos del escudo arcano
    var resistencia = 400
    var durabilidad = 600
       
