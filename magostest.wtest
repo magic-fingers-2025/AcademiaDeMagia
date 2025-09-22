@@ -1,29 +1,55 @@
 import academia.*
 import magos.*
+
 describe "academina" {
-    test "test 1" {
-        assert.that(true)
-    }
+  test "test 1" {
+    assert.that(true)
+  }
+  
+  test "Selene alterna Luz Lunar y entrena, lo que eleva su poder a 120" {
+    selene.alternarHabilidad()
+    selene.entrenar()
+    assert.equals(120, selene.poder())
+  }
+  
+  test "Si la academia la evaluara ahora, no podría unirse al equipo porque su energía sigue siendo 35." {
+    selene.alternarHabilidad()
+    selene.entrenar()
+    assert.equals(35, selene.energia())
+  }
+  
+  test "En otro test, Selene solo entrena sin alternar la Luz Lunar y es evaluada por la academia. Esta vez podría unirse al equipo, ya que su energía sería de 60." {
+    selene.entrenar()
+    assert.equals(60, selene.energia())
+  }
+}
 
-    test "Selene alterna Luz Lunar y entrena, lo que eleva su poder a 120" {
-        selene.alternarHabilidad()
-        selene.entrenar()
-        assert.equals(120, selene.poder())
-      
-    }
-
-    test "Si la academia la evaluara ahora, no podría unirse al equipo porque su energía sigue siendo 35." {
-        selene.alternarHabilidad()
-        selene.entrenar()
-        assert.equals(35, selene.energia())
-      
-    }
-    test "En otro test, Selene solo entrena sin alternar la Luz Lunar y es evaluada por la academia. Esta vez podría unirse al equipo, ya que su energía sería de 60." {
-        selene.entrenar()
-        assert.equals(60, selene.energia())
-
-
-
-      
-    }
+describe "Tests de Balthazar" {
+  test "Balthazar inicial" {
+    // energía mágica = 450 horas / 10 = 45
+    // poder base = (35 - 0) * 3 = 105
+    assert.equals(45, balthazar.energia())
+    assert.equals(105, balthazar.poder())
+  }
+  
+  test "Balthazar después de entrenar una vez" {
+    // Entrenar = +100 horas y +1 hechizo dañino
+    balthazar.entrenar()
+    
+    // energía = (450 + 100) / 10 = 55
+    // poder = (35 - 1) * 3 = 102
+    assert.equals(55, balthazar.energia())
+    assert.equals(102, balthazar.poder())
+  }
+  
+  test "Balthazar después de entrenar dos veces" {
+    balthazar.entrenar()
+    balthazar.entrenar()
+    
+    // energía = (450 + 200) / 10 = 65
+    // poder = (35 - 2) * 3 = 99
+    assert.equals(65, balthazar.energia())
+    assert.equals(99, balthazar.poder())
+  }
+  
 }
