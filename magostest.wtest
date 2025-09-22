@@ -27,3 +27,19 @@ describe "academina" {
       
     }
 }
+
+describe "test de aldric"{
+    test "Inicialmente Aldric tiene un poder de 15 "{
+        assert.equals(15, aldric.poder())
+    }
+    test "Aldric entrena una vez y su poder cambia"{
+        aldric.entrenar()
+        assert.equals(35, aldric.poder())
+    }
+    test "Aldric cambia a bastón de fuego y entrena. Ahora su poder es 45"{
+        aldric.usarBaston(bastonDeFuego)
+        aldric.entrenar()
+        assert.equals(45, aldric.poder())
+    }
+
+}
