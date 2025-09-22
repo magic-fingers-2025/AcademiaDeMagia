@@ -135,3 +135,8 @@
 {"level":"info","message":"⌛ Validating magostest.wtest","timeElapsed":118,"timestamp":"2025-09-18T23:57:16.059Z"}
 {"level":"info","message":"🧪 Test runner executed on c:\\Users\\Diego\\OneDrive\\Documentos\\Proyectos Wollok Objetos 1\\AcademiaDeMagia","result":{"errored":0,"failed":0,"ok":1},"testsFailed":[],"timeElapsed":341,"timestamp":"2025-09-18T23:57:24.646Z"}
 {"level":"info","message":"🧪 Test runner executed on c:\\Users\\Diego\\OneDrive\\Documentos\\Proyectos Wollok Objetos 1\\AcademiaDeMagia","result":{"errored":0,"failed":0,"ok":4},"testsFailed":[],"timeElapsed":343,"timestamp":"2025-09-18T23:57:33.423Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":177,"timestamp":"2025-09-22T00:14:10.648Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":101,"timestamp":"2025-09-22T00:14:10.753Z"}
+{"level":"info","message":"⌛ Validating magostest.wtest","timeElapsed":146,"timestamp":"2025-09-22T00:14:11.052Z"}
+{"level":"info","message":"⌛ Validating academia.wlk","timeElapsed":164,"timestamp":"2025-09-22T00:14:11.290Z"}
+{"level":"info","message":"⌛ Validating magos.wlk","timeElapsed":123,"timestamp":"2025-09-22T00:14:11.414Z"}
