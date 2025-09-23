@@ -33,8 +33,8 @@ object balthazar  {
   var horas = 450
   var hechizosDaninos = 0
 
-  method energia() = horas / 10
-  method poder() = (35 - hechizosDaninos) * 3
+  method poder() = horas / 10
+  method energia() = (35 - hechizosDaninos) * 3
 
   method entrenar() {
     horas += 100
