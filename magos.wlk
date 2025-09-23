@@ -7,25 +7,28 @@ métodos: entrenar,
 */
 
 object selene {
+   // Atención: el enunciado está pobremente escrito según las reglas del idioma castellano (sujeto-predicado). Cuando dice "Cuando entrena sin estar potenciada", el sujeto tácito es Luz Lunar y no selene. Aunque así sea, que se potencie Luz Lunar, es idependiente o no de que Luz Lunar esté activada?
+
+   // Debajo resolución ASUMIENDO QUE SI SE ACTIVA LUZ LUNAR, TAMBIÉN SE POTENCIA.
+   
    var energia=35
    var poder = 60 
-   var luzLunar= false 
-   var estaPotenciada = true // el enunciado habla claramente de este estado
+   var luzLunarActivada = false 
+   
 
    // getters para academia
-   method poder() =poder 
-   method energia() =energia 
+   method poder() = poder 
+   method energia() = energia 
    
    // nombre declarativo
-   method alternarLuzLunar() {
-    luzLunar = !luzLunar
+   method activarLuzLunar() {
+    luzLunarActivada = true
    }
-   method noEstaPotenciada(){
-     estaPotenciada = not estaPotenciada
-   } 
 
+   
+   
    method entrenar(){
-      if (estaPotenciada) {
+      if (luzLunarActivada) {
          poder = 2*poder
       }
       else {
