@@ -9,22 +9,21 @@ métodos: entrenar,
 object selene {
    var energia=35
    var poder = 60 
-   var luzLunar= false  
-   method habilidadActivada() =luzLunar // se agrega comentario
+   var luzLunarActivada = false  
+  
    method poder() =poder 
    method energia() =energia 
-   method alternarHabilidad() {
-    luzLunar = !luzLunar
-} 
+   method activarLuzLunar() {
+    luzLunarActivada = true
+   }
    method entrenar() {
-    if (self.habilidadActivada()){
+    if (luzLunarActivada){
         poder =  poder *2
     }else{
-       energia = energia + 25
+       energia +=  25
     }     
 
-     
-   }
+     }
        
 }
 
