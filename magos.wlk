@@ -66,16 +66,14 @@ object iris {
    
 }
 object escudoMagicoDeArcana {
-   //estos son los valores basicos del escudo arcano
-   var resistencia = 400
-   var durabilidad = 600
+   
 
    method mejorarResistencia(ResistenciaCambiada) {
-      resistencia = resistencia + ResistenciaCambiada
+   const resistencia = 400 + ResistenciaCambiada
    }
       
    method mejorarDurabilidad(DurabilidadCambiada) {
-      durabilidad = durabilidad + DurabilidadCambiada
+   var durabilidad = 600 + DurabilidadCambiada
       // su durabilidad no puede ser más que 1000
       if(durabilidad > 1000) {
          durabilidad = 1000
