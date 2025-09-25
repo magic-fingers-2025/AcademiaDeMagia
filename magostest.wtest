@@ -43,3 +43,17 @@ describe "test de aldric"{
     }
 
 }
+
+describe "test de IrisLaHealer" {
+  test "Iris usa su poder de sanación en el Escudo Mágico de Arcana" {
+    iris.usarSanacion()
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia())
+    }
+  test "vuelve a usar su sanación" {
+    iris.entrenar()
+    iris.usarSanacion()
+    assert.equals(660, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(480, escudoMagicoDeArcana.getmejoraResistencia())
+    }
+}
