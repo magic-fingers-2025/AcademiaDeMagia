@@ -62,21 +62,19 @@ object iris {
 
 
    method usarSanacion() {
-      var resistenciaExtra
-      var durabilidadExtra
+      
       // cuando usa sanacion tiene 2 variables si es impar o no.
       if((capacidadDeSanacion).odd()) {
       //si es impar tiene valores mas altos
-         resistenciaExtra = 150
-         durabilidadExtra = 100
+        escudoMagicoDeArcana.mejorarResistencia(150)
+        escudoMagicoDeArcana.mejorarDurabilidad(100)
          }
       else{
-         resistenciaExtra = 80 
-         durabilidadExtra = 60 
+        escudoMagicoDeArcana.mejorarResistencia(80)
+        escudoMagicoDeArcana.mejorarDurabilidad(60)
          //siendo que no es impar sus poderes disminuyen     
       }
-  escudoMagicoDeArcana.mejorarResistencia(resistenciaExtra)
-  escudoMagicoDeArcana.mejorarDurabilidad(durabilidadExtra)
+  
   }
    
 }
