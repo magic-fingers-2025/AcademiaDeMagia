@@ -1,47 +1,117 @@
 import academia.*
 import magos.*
-describe "academina" {
-    test "test 1" {
-        assert.that(true)
-    }
 
-    test "Selene alterna Luz Lunar y entrena, lo que eleva su poder a 120" {
-        selene.alternarHabilidad()
-        selene.entrenar()
-        assert.equals(120, selene.poder())
-      
-    }
-
-    test "Si la academia la evaluara ahora, no podría unirse al equipo porque su energía sigue siendo 35." {
-        selene.alternarHabilidad()
-        selene.entrenar()
-        assert.equals(35, selene.energia())
-      
-    }
-    test "En otro test, Selene solo entrena sin alternar la Luz Lunar y es evaluada por la academia. Esta vez podría unirse al equipo, ya que su energía sería de 60." {
-        selene.entrenar()
-        assert.equals(60, selene.energia())
-
-
-
-      
-    }
+describe "Selene" {
+  test "test 1" {
+    assert.that(true)
+  }
+  
+  test "Selene alterna Luz Lunar y entrena, lo que eleva su poder a 120" {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(120, selene.poder())
+  }
+  
+  test "Si la academia la evaluara ahora, no podría unirse al equipo porque su energía sigue siendo 35." {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(35, selene.energia())
+  }
+  
+  test "En otro test, Selene solo entrena sin alternar la Luz Lunar y es evaluada por la academia. Esta vez podría unirse al equipo, ya que su energía sería de 60." {
+    selene.entrenar()
+    assert.equals(60, selene.energia())
+  }
+  
+  test "Selene arranca con valores iniciales" {
+    assert.equals(35, selene.energia())
+    assert.equals(60, selene.poder())
+  }
+  
+  test "Selene entrena sin Luz Lunar activada" {
+    // nos aseguramos que esté desactivada
+    selene.entrenar()
+    assert.equals(60, selene.poder()) // poder no cambia
+    assert.equals(60, selene.energia()) // 35 + 25
+  }
+  
+  test "Selene activa Luz Lunar y entrena duplica poder" {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(120, selene.poder()) // 60 * 2
+    assert.equals(35, selene.energia()) // energía no cambia
+  }
+  
+  test "Selene entrena dos veces sin Luz Lunar" {
+    // desactivada
+    selene.entrenar()
+    selene.entrenar()
+    assert.equals(85, selene.energia()) // 35 + 25 + 25
+    assert.equals(60, selene.poder()) // poder sigue igual
+  }
+  
+  test "Selene activa Luz Lunar y entrena dos veces duplica dos veces el poder" {
+    selene.activarLuzLunar()
+    selene.entrenar() // primer entrenamiento: 60*2=120
+    selene.entrenar() // segundo entrenamiento: 120*2=240
+    assert.equals(240, selene.poder()) // poder duplicado dos veces
+    assert.equals(35, selene.energia()) // energía no cambia
+  }
 }
 
-describe "test de aldric"{
-    test "Inicialmente Aldric tiene un poder de 15 "{
-        assert.equals(15, aldric.poder())
-    }
-    test "Aldric entrena una vez y su poder cambia"{
-        aldric.entrenar()
-        assert.equals(35, aldric.poder())
-    }
-    test "Aldric cambia a bastón de fuego y entrena. Ahora su poder es 45"{
-        aldric.usarBaston(bastonDeFuego)
-        aldric.entrenar()
-        assert.equals(45, aldric.poder())
-    }
-
+describe "test de aldric" {
+  test "Inicialmente Aldric tiene un poder de 15 " {
+    assert.equals(15, aldric.poder())
+  }
+  
+  test "Aldric entrena una vez y su poder cambia" {
+    aldric.entrenar()
+    assert.equals(35, aldric.poder())
+  }
+  
+  test "Aldric cambia a bastón de fuego y entrena. Ahora su poder es 45" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    assert.equals(45, aldric.poder())
+  }
+  
+  test "Aldric - inicial" {
+    assert.equals(65, aldric.energia()) // 65 + 20*0
+    assert.equals(15, aldric.poder()) // 30/2
+  }
+  
+  test "Aldric entrena una vez con bastón de hielo" {
+    aldric.usarBaston(bastonDeHielo)
+    aldric.entrenar()
+    assert.equals(85, aldric.energia()) // 65 + 20*1
+    assert.equals(35, aldric.poder()) // (30+40)/2 = 35
+  }
+  
+  test "Aldric entrena una vez con bastón de fuego" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    assert.equals(85, aldric.energia()) // 65 + 20*1
+    assert.equals(45, aldric.poder()) // (30+60)/2 = 45
+  }
+  
+  test "Aldric cambia de bastón y entrena dos veces (fuego luego hielo)" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar() // +60 habilidad, entrenamientos=1
+    aldric.usarBaston(bastonDeHielo)
+    aldric.entrenar() // +40 habilidad, entrenamientos=2
+    assert.equals(105, aldric.energia()) // 65 + 20*2
+    // habilidad = 30 + 60 + 40 = 130 -> poder = 65
+    assert.equals(65, aldric.poder())
+  }
+  
+  test "Aldric entrena dos veces con bastón de fuego" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    aldric.entrenar()
+    assert.equals(105, aldric.energia()) // 65 + 20*2
+    // habilidad = 30 + 60 + 60 = 150 -> poder = 75
+    assert.equals(75, aldric.poder())
+  }
 }
 
 describe "test de IrisLaHealer" {
@@ -49,11 +119,56 @@ describe "test de IrisLaHealer" {
     iris.usarSanacion()
     assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad())
     assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia())
-    }
+  }
+  
   test "vuelve a usar su sanación" {
     iris.entrenar()
     iris.usarSanacion()
     assert.equals(660, escudoMagicoDeArcana.getmejoraDurabilidad())
     assert.equals(480, escudoMagicoDeArcana.getmejoraResistencia())
-    }
+  }
+  
+  test "Iris arranca con valores iniciales" {
+    assert.equals(1, iris.getCapacidadDeSanacion())
+    assert.equals(400, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(600, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
+  
+  test "Iris usa sanación con capacidad impar" {
+    iris.getCapacidadDeSanacion()
+    iris.usarSanacion()
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia()) // 400 + 150
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad()) // 600 + 100
+  }
+  
+  test "Iris entrena y usa sanación con capacidad par" {
+    
+    iris.getCapacidadDeSanacion()
+    iris.entrenar() // capacidad = 2 (par)
+    iris.usarSanacion()
+    // resistencia 400 + 80*2 = 560
+    // durabilidad 600 + 60*2 = 720
+    assert.equals(560, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(720, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
+  
+  test "Iris entrena dos veces y usa sanación con capacidad impar otra vez" {
+    
+    iris.getCapacidadDeSanacion()
+    iris.entrenar() // capacidad = 2
+    iris.entrenar() // capacidad = 3 (impar)
+    iris.usarSanacion()
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia()) // 400 + 150
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad()) // 600 + 100
+  }
+  
+  test "Iris entrena varias veces y la durabilidad no supera 1000" {
+
+    iris.getCapacidadDeSanacion()
+    iris.usarSanacion()
+    // resistencia 400 + 80*10 = 1200
+    // durabilidad 600 + 60*10 = 1200 → debería quedar en 1000 por el límite
+    assert.equals(1600, escudoMagicoDeArcana.getmejoraResistencia()) // 400+1200
+    assert.equals(1000, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
 }
