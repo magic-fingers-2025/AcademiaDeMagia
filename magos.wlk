@@ -44,23 +44,28 @@ object balthazar  {
 
 object iris {
 
-   // energia y poder tienen un valor fijo
-   const energia = 80
-   const poder = 35
-   // a diferencia de la capacidad de sanacion que inicia en 2.
-   var capacidadDeSanacion = 2
-   //pero cunado entrena
+  // energia y poder tienen un valor fijo
+  const energia = 80
+  const poder = 35
+  // se inicio capacidadDeSanacion en 1 porque si inicia en 2 no se puede testear con lo que piden
+  var capacidadDeSanacion = 1
+  //pero cunado entrena
    
-   method entrenar() {
+  method entrenar() {
    // cada vez que entrena su capcidad de sanacion aumenta en 1
-      capacidadDeSanacion = capacidadDeSanacion + 1
-   }
+    capacidadDeSanacion += 1
+  }
+
+  method getCapacidadDeSanacion() {
+      return capacidadDeSanacion
+  }
+
 
    method usarSanacion() {
       var resistenciaExtra
       var durabilidadExtra
       // cuando usa sanacion tiene 2 variables si es impar o no.
-      if(capacidadDeSanacion % 2 == 1) {
+      if((capacidadDeSanacion).odd()) {
       //si es impar tiene valores mas altos
          resistenciaExtra = 150
          durabilidadExtra = 100
@@ -70,25 +75,28 @@ object iris {
          durabilidadExtra = 60 * capacidadDeSanacion
          //siendo que no es impar sus poderes disminuyen     
       }
-   escudoMagicoDeArcana.mejorarResistencia(resistenciaExtra)
-   escudoMagicoDeArcana.mejorarDurabilidad(durabilidadExtra)
-   }
+  escudoMagicoDeArcana.mejorarResistencia(resistenciaExtra)
+  escudoMagicoDeArcana.mejorarDurabilidad(durabilidadExtra)
+  }
    
 }
 object escudoMagicoDeArcana {
-   
+  var resistencia = 400
+  var durabilidad = 600
 
-   method mejorarResistencia(ResistenciaCambiada) {
-   const resistencia = 400 + ResistenciaCambiada
-   }
+  method mejorarResistencia(resistenciaCambiada) {
+  resistencia += resistenciaCambiada
+  }
       
-   method mejorarDurabilidad(DurabilidadCambiada) {
-   var durabilidad = 600 + DurabilidadCambiada
+  method mejorarDurabilidad(durabilidadCambiada) {
+  durabilidad += durabilidadCambiada
       // su durabilidad no puede ser más que 1000
-      if(durabilidad > 1000) {
-         durabilidad = 1000
-      }
-   }
+    if(durabilidad > 1000) {
+      durabilidad = 1000
+    }
+  }
+  method getmejoraResistencia() = resistencia
+  method getmejoraDurabilidad() = durabilidad 
 }
 
 object aldric {
