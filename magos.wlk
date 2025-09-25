@@ -43,8 +43,56 @@ object balthazar  {
 }
 
 object iris {
-}
 
+  // energia y poder tienen un valor fijo
+  const energia = 80
+  const poder = 35
+  // se inicio capacidadDeSanacion en 1 porque si inicia en 2 no se puede testear con lo que piden
+  var capacidadDeSanacion = 1
+  //pero cunado entrena
+   
+  method entrenar() {
+   // cada vez que entrena su capcidad de sanacion aumenta en 1
+    capacidadDeSanacion += 1
+  }
+
+  method getCapacidadDeSanacion() {
+      return capacidadDeSanacion
+  }
+
+
+   method usarSanacion() {
+      
+      // cuando usa sanacion tiene 2 variables si es impar o no.
+      if((capacidadDeSanacion).odd()) {
+      //si es impar tiene valores mas altos
+        escudoMagicoDeArcana.mejorarResistencia(150)
+        escudoMagicoDeArcana.mejorarDurabilidad(100)
+         }
+      else{
+        escudoMagicoDeArcana.mejorarResistencia(80)
+        escudoMagicoDeArcana.mejorarDurabilidad(60)
+         //siendo que no es impar sus poderes disminuyen     
+      }
+  
+  }
+   
+}
+object escudoMagicoDeArcana {
+  var resistencia = 400
+  var durabilidad = 600
+
+  method mejorarResistencia(resistenciaCambiada) {
+  resistencia += resistenciaCambiada
+  }
+      
+  method mejorarDurabilidad(durabilidadCambiada) {
+  durabilidad += durabilidadCambiada.min(400)
+    // su durabilidad no puede ser más que 1000
+  }
+  method getmejoraResistencia() = resistencia
+  method getmejoraDurabilidad() = durabilidad 
+}
 
 object aldric {
   var baston = bastonDeHielo
