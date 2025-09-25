@@ -44,6 +44,35 @@ describe "test de aldric"{
 
 }
 
+
+describe "Tests de Balthazar" {
+  test "Balthazar inicial" {
+    // energía mágica = 450 horas / 10 = 45
+    // poder base = (35 - 0) * 3 = 105
+    assert.equals(45, balthazar.poder())
+    assert.equals(105, balthazar.energia())
+  }
+  
+  test "Balthazar después de entrenar una vez" {
+    // Entrenar = +100 horas y +1 hechizo dañino
+    balthazar.entrenar()
+    
+    // energía = (450 + 100) / 10 = 55
+    // poder = (35 - 1) * 3 = 102
+    assert.equals(55, balthazar.poder())
+    assert.equals(102, balthazar.energia())
+  }
+  
+  test "Balthazar después de entrenar dos veces" {
+    balthazar.entrenar()
+    balthazar.entrenar()
+    
+    // energía = (450 + 200) / 10 = 65
+    // poder = (35 - 2) * 3 = 99
+    assert.equals(65, balthazar.poder())
+    assert.equals(99, balthazar.energia())
+  }
+
 describe "test de IrisLaHealer" {
   test "Iris usa su poder de sanación en el Escudo Mágico de Arcana" {
     iris.usarSanacion()
@@ -56,4 +85,5 @@ describe "test de IrisLaHealer" {
     assert.equals(660, escudoMagicoDeArcana.getmejoraDurabilidad())
     assert.equals(480, escudoMagicoDeArcana.getmejoraResistencia())
     }
+
 }
