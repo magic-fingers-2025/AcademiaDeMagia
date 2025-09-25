@@ -53,7 +53,7 @@ describe "test de IrisLaHealer" {
   test "vuelve a usar su sanación" {
     iris.entrenar()
     iris.usarSanacion()
-    assert.equals(720, escudoMagicoDeArcana.getmejoraDurabilidad())
-    assert.equals(560, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(660, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(480, escudoMagicoDeArcana.getmejoraResistencia())
     }
 }

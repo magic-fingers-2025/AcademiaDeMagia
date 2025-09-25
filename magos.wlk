@@ -71,8 +71,8 @@ object iris {
          durabilidadExtra = 100
          }
       else{
-         resistenciaExtra = 80 * capacidadDeSanacion
-         durabilidadExtra = 60 * capacidadDeSanacion
+         resistenciaExtra = 80 
+         durabilidadExtra = 60 
          //siendo que no es impar sus poderes disminuyen     
       }
   escudoMagicoDeArcana.mejorarResistencia(resistenciaExtra)
