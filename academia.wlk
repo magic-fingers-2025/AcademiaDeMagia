@@ -5,8 +5,8 @@ métodos: reclutar, poderTotal, deltaEnergia, ...
 
 import magos.*
 object academia {
-  var equipo = []
-  var candidatos = []
+  const equipo = []
+  const candidatos = []
   //verificar que su energía mágica sea mayor a 40 y su poder igual o superior a 30.
   method cumpleConRequisitos(unMago) = self.cumpleConEnergiaApropiada(
     unMago
