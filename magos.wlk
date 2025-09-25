@@ -87,11 +87,8 @@ object escudoMagicoDeArcana {
   }
       
   method mejorarDurabilidad(durabilidadCambiada) {
-  durabilidad += durabilidadCambiada
-      // su durabilidad no puede ser más que 1000
-    if(durabilidad > 1000) {
-      durabilidad = 1000
-    }
+  durabilidad += durabilidadCambiada.min(400)
+    // su durabilidad no puede ser más que 1000
   }
   method getmejoraResistencia() = resistencia
   method getmejoraDurabilidad() = durabilidad 
