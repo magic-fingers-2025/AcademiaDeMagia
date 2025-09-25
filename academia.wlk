@@ -4,9 +4,9 @@ métodos: reclutar, poderTotal, deltaEnergia, ...
 */
 
 import magos.*
-object academina {
-  const equipo = []
-  const candidatos = []
+object academia {
+  var equipo = []
+  var candidatos = []
   //verificar que su energía mágica sea mayor a 40 y su poder igual o superior a 30.
   method cumpleConRequisitos(unMago) = self.cumpleConEnergiaApropiada(
     unMago
@@ -21,11 +21,11 @@ object academina {
   // Re-evaluar candidatos: los que cumplen pasan al equipo
   method reevaluarCandidatos() {
     var nuevosMiembros = []
-    nuevosMiembros = candidatos.filter({ c => self.cumpleConRequisitos(c) })
+    nuevosMiembros = candidatos.filter({ c => self.cumpleConRequisitos(c)})
     
-    nuevosMiembros.forEach({ c => equipo.add(c) })
+    nuevosMiembros.forEach({ c => equipo.add(c)})
     
-    nuevosMiembros.forEach({ c => candidatos.remove(c) })
+    nuevosMiembros.forEach({ c => candidatos.remove(c)})
   }
   
   method cumpleConEnergiaApropiada(unMago) = unMago.energia() > 40
@@ -34,25 +34,25 @@ object academina {
   
   // Entrenar a todos los del equipo
   method entrenarEquipo() {
-    equipo.forEach({ m => m.entrenar() })
+    equipo.forEach({ m => m.entrenar()})
   }
   
   // Poder total del equipo
-  method poderTotal() = equipo.sum({ m => m.poder() })
+  method poderTotal() = equipo.sum({ m => m.poder()})
   
   // ¿Condiciones óptimas? (nadie con energía < 45)
-  method condicionesOptimas() = equipo.All({ m => m.energia() >= 45 })
+  method condicionesOptimas() = equipo.all({ m => m.energia() >= 45})
   
   // Delta de energía (máxima - mínima, en valor absoluto)
   method deltaEnergia() {
-    var magoConMaximaEnergia = equipo.max({ m => m.energia() })
-    var magoConMinimaEnergia = equipo.min({ m => m.energia() })
-    return magoConMaximaEnergia.energia() - magoConMinimaEnergia.energia()
+    var magoConMaximaEnergia = equipo.max({ m => m.energia()})
+    var magoConMinimaEnergia = equipo.min({ m => m.energia()})
+    return (magoConMaximaEnergia.energia() - magoConMinimaEnergia.energia()).abs()
   }
   
   // Lista de poderes de magos con energía > 90
   method poderesDeMagosConAltaEnergia() {
     var magosConMasDe90DeEnergia = equipo.filter({ m => m.energia() > 90 })
-    return magosConMasDe90DeEnergia.map({ m => m.poder() })
+    return magosConMasDe90DeEnergia.map({ m => m.poder()})
   }
 }
