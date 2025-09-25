@@ -40,6 +40,17 @@ object selene {
 
 
 object balthazar  {
+  var horas = 450
+  var hechizosDaninos = 0
+  
+  method poder() = horas / 10
+  
+  method energia() = (35 - hechizosDaninos) * 3
+  
+  method entrenar() {
+    horas += 100
+    hechizosDaninos += 1
+  }
 }
 
 object iris {
@@ -70,8 +81,8 @@ object iris {
         escudoMagicoDeArcana.mejorarDurabilidad(100)
          }
       else{
-        escudoMagicoDeArcana.mejorarResistencia(80)
-        escudoMagicoDeArcana.mejorarDurabilidad(60)
+        escudoMagicoDeArcana.mejorarResistencia(80 * capacidadDeSanacion)
+        escudoMagicoDeArcana.mejorarDurabilidad(60 * capacidadDeSanacion)
          //siendo que no es impar sus poderes disminuyen     
       }
   
@@ -87,8 +98,10 @@ object escudoMagicoDeArcana {
   }
       
   method mejorarDurabilidad(durabilidadCambiada) {
-  durabilidad += durabilidadCambiada.min(400)
-    // su durabilidad no puede ser más que 1000
+    durabilidad = durabilidad + durabilidadCambiada
+    if (durabilidad > 1000) {
+      durabilidad = 1000
+    }
   }
   method getmejoraResistencia() = resistencia
   method getmejoraDurabilidad() = durabilidad 
