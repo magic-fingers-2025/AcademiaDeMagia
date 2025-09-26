@@ -36,7 +36,7 @@ object academia {
     }
   }
   // Entrenar un mago
-  method entrenar(unMago){
+  method entrenarMagoDeEquipo(unMago){
     unMago.entrenar()
   }
 
