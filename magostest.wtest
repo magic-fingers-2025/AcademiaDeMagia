@@ -172,3 +172,18 @@ describe "test de IrisLaHealer" {
     assert.equals(1000, escudoMagicoDeArcana.getmejoraDurabilidad())
   }
 }
+
+describe "TEST BALTHAZAR" {
+  test "Balthazar puede ser reclutado al inicio, pero después de entrenar dos veces, su energía mágica aumenta a 65 y su poder baja a 29. En ese momento ya no puede ser reclutado." {
+    
+    
+    
+    academia.cumpleConRequisitos(balthazar)
+    assert.that(academia.cumpleConRequisitos(balthazar))
+    balthazar.entrenar()
+    balthazar.entrenar()
+    assert.equals(65, balthazar.energia())
+    assert.equals(29, balthazar.poder())
+    assert.notThat(academia.cumpleConRequisitos(balthazar))
+  }
+}
