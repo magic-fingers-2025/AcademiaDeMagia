@@ -15,10 +15,13 @@ object academia {
   method listaDeCandidatos() {
     return listaDeCandidatos
   }
-  
+  // condiciones para ser reclutado UTIL EN LOS TESTS DE TRUE/FALSE
+  method puedeSerReclutado(unMago) {
+    return unMago.energia()>40 and unMago.poder()>= 30
+  }
   
   method reclutar(unMago){
-    if (unMago.energia()>40 and unMago.poder()>= 30){
+    if (self.puedeSerReclutado(unMago)){
       self.adicionarAlEquipo(unMago)
     }
     else{
@@ -57,7 +60,7 @@ object academia {
     return not equipoDeMagos.any({m => m.energia() < 45})
   }
   method deltaEnergia(){
-    return (self.equipoDeMagos().max({m => m.poder()}) - self.equipoDeMagos().min({m => m.poder()})).abs()
+    return (self.equipoDeMagos().max({m => m.poder()}).poder() - self.equipoDeMagos().min({m => m.poder()}).poder()).abs()
     
   }
 
