@@ -37,7 +37,10 @@ object academia {
   }
   // Entrenar un mago
   method entrenarMagoDeEquipo(unMago){
-    unMago.entrenar()
+    if (equipoDeMagos.contains(unMago)){
+      unMago.entrenar()
+    }
+    
   }
 
   // También agregamos la posibilidad de entrenar a todos AL MISMO TIEMPO
