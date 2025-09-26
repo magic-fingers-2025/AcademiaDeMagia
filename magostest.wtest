@@ -124,8 +124,8 @@ describe "test de IrisLaHealer" {
   test "vuelve a usar su sanación" {
     iris.entrenar()
     iris.usarSanacion()
-    assert.equals(660, escudoMagicoDeArcana.getmejoraDurabilidad())
-    assert.equals(480, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(720, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(560, escudoMagicoDeArcana.getmejoraResistencia())
   }
   
   test "Iris arranca con valores iniciales" {
@@ -163,12 +163,20 @@ describe "test de IrisLaHealer" {
   }
   
   test "Iris entrena varias veces y la durabilidad no supera 1000" {
-
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()//entrena 10 veces en total
     iris.getCapacidadDeSanacion()
     iris.usarSanacion()
     // resistencia 400 + 80*10 = 1200
     // durabilidad 600 + 60*10 = 1200 → debería quedar en 1000 por el límite
-    assert.equals(1600, escudoMagicoDeArcana.getmejoraResistencia()) // 400+1200
+    assert.equals(1200, escudoMagicoDeArcana.getmejoraResistencia())
     assert.equals(1000, escudoMagicoDeArcana.getmejoraDurabilidad())
   }
 }
