@@ -35,8 +35,12 @@ object academia {
       equipoDeMagos.add(unMago)
     }
   }
+  // Entrenar un mago
+  method entrenar(unMago){
+    unMago.entrenar()
+  }
 
-  // Entrenar a todos los del equipo
+  // También agregamos la posibilidad de entrenar a todos AL MISMO TIEMPO
   method entrenarEquipo() {
     equipoDeMagos.forEach({ m => m.entrenar()})
   }
