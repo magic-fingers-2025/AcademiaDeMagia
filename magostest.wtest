@@ -1,5 +1,6 @@
 import academia.*
 import magos.*
+<<<<<<< HEAD
 
 describe "Selene" {
   test "test 1" {
@@ -186,4 +187,10 @@ describe "TEST BALTHAZAR" {
     assert.equals(29, balthazar.poder())
     assert.notThat(academia.cumpleConRequisitos(balthazar))
   }
+=======
+describe "academina" {
+    test "test 1" {
+        assert.that(true)
+    }
+>>>>>>> balthazarV3
 }
