@@ -1,5 +1,5 @@
 object selene {
-<<<<<<< HEAD
+
    // Atención: el enunciado está pobremente escrito según las reglas del idioma castellano (sujeto-predicado). Cuando dice "Cuando entrena sin estar potenciada", el sujeto tácito es Luz Lunar y no selene. Aunque así sea, que se potencie Luz Lunar, es idependiente o no de que Luz Lunar esté activada?
 
    // Debajo resolución ASUMIENDO QUE SI SE ACTIVA LUZ LUNAR, TAMBIÉN SE POTENCIA.
@@ -44,13 +44,9 @@ object balthazar  {
     horas += 100
     hechizosDaninos += 1
   }
-=======
+
 }
 
-
-object balthazar {
->>>>>>> balthazarV3
-}
 
 object iris {
 
