@@ -40,6 +40,9 @@ object academia {
     if (equipoDeMagos.contains(unMago)){
       unMago.entrenar()
     }
+    else{
+      return "Sólo se puede entrenar un mago del equipo"
+    }
     
   }
 
