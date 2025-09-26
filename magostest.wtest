@@ -1,7 +1,353 @@
 import academia.*
 import magos.*
-describe "academina" {
-    test "test 1" {
-        assert.that(true)
-    }
+
+describe "Selene" {
+  test "test 1" {
+    assert.that(true)
+  }
+  
+  test "Selene alterna Luz Lunar y entrena, lo que eleva su poder a 120" {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(120, selene.poder())
+  }
+  
+  test "Si la academia la evaluara ahora, no podría unirse al equipo porque su energía sigue siendo 35." {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(35, selene.energia())
+  }
+  
+  test "En otro test, Selene solo entrena sin alternar la Luz Lunar y es evaluada por la academia. Esta vez podría unirse al equipo, ya que su energía sería de 60." {
+    selene.entrenar()
+    assert.equals(60, selene.energia())
+  }
+  
+  test "Selene arranca con valores iniciales" {
+    assert.equals(35, selene.energia())
+    assert.equals(60, selene.poder())
+  }
+  
+  test "Selene entrena sin Luz Lunar activada" {
+    // nos aseguramos que esté desactivada
+    selene.entrenar()
+    assert.equals(60, selene.poder()) // poder no cambia
+    assert.equals(60, selene.energia()) // 35 + 25
+  }
+  
+  test "Selene activa Luz Lunar y entrena duplica poder" {
+    selene.activarLuzLunar()
+    selene.entrenar()
+    assert.equals(120, selene.poder()) // 60 * 2
+    assert.equals(35, selene.energia()) // energía no cambia
+  }
+  
+  test "Selene entrena dos veces sin Luz Lunar" {
+    // desactivada
+    selene.entrenar()
+    selene.entrenar()
+    assert.equals(85, selene.energia()) // 35 + 25 + 25
+    assert.equals(60, selene.poder()) // poder sigue igual
+  }
+  
+  test "Selene activa Luz Lunar y entrena dos veces duplica dos veces el poder" {
+    selene.activarLuzLunar()
+    selene.entrenar() // primer entrenamiento: 60*2=120
+    selene.entrenar() // segundo entrenamiento: 120*2=240
+    assert.equals(240, selene.poder()) // poder duplicado dos veces
+    assert.equals(35, selene.energia()) // energía no cambia
+  }
+}
+
+describe "test de aldric" {
+  test "Inicialmente Aldric tiene un poder de 15 " {
+    assert.equals(15, aldric.poder())
+  }
+  
+  test "Aldric entrena una vez y su poder cambia" {
+    aldric.entrenar()
+    assert.equals(35, aldric.poder())
+  }
+  
+  test "Aldric cambia a bastón de fuego y entrena. Ahora su poder es 45" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    assert.equals(45, aldric.poder())
+  }
+  
+  test "Aldric - inicial" {
+    assert.equals(65, aldric.energia()) // 65 + 20*0
+    assert.equals(15, aldric.poder()) // 30/2
+  }
+  
+  test "Aldric entrena una vez con bastón de hielo" {
+    aldric.usarBaston(bastonDeHielo)
+    aldric.entrenar()
+    assert.equals(85, aldric.energia()) // 65 + 20*1
+    assert.equals(35, aldric.poder()) // (30+40)/2 = 35
+  }
+  
+  test "Aldric entrena una vez con bastón de fuego" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    assert.equals(85, aldric.energia()) // 65 + 20*1
+    assert.equals(45, aldric.poder()) // (30+60)/2 = 45
+  }
+  
+  test "Aldric cambia de bastón y entrena dos veces (fuego luego hielo)" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar() // +60 habilidad, entrenamientos=1
+    aldric.usarBaston(bastonDeHielo)
+    aldric.entrenar() // +40 habilidad, entrenamientos=2
+    assert.equals(105, aldric.energia()) // 65 + 20*2
+    // habilidad = 30 + 60 + 40 = 130 -> poder = 65
+    assert.equals(65, aldric.poder())
+  }
+  
+  test "Aldric entrena dos veces con bastón de fuego" {
+    aldric.usarBaston(bastonDeFuego)
+    aldric.entrenar()
+    aldric.entrenar()
+    assert.equals(105, aldric.energia()) // 65 + 20*2
+    // habilidad = 30 + 60 + 60 = 150 -> poder = 75
+    assert.equals(75, aldric.poder())
+  }
+}
+
+describe "test de IrisLaHealer" {
+  test "Iris usa su poder de sanación en el Escudo Mágico de Arcana" {
+    iris.usarSanacion()
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia())
+  }
+  
+  test "vuelve a usar su sanación" {
+    iris.entrenar()
+    iris.usarSanacion()
+    assert.equals(720, escudoMagicoDeArcana.getmejoraDurabilidad())
+    assert.equals(560, escudoMagicoDeArcana.getmejoraResistencia())
+  }
+  
+  test "Iris arranca con valores iniciales" {
+    assert.equals(1, iris.getCapacidadDeSanacion())
+    assert.equals(400, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(600, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
+  
+  test "Iris usa sanación con capacidad impar" {
+    iris.getCapacidadDeSanacion()
+    iris.usarSanacion()
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia()) // 400 + 150
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad()) // 600 + 100
+  }
+  
+  test "Iris entrena y usa sanación con capacidad par" {
+    iris.getCapacidadDeSanacion()
+    iris.entrenar() // capacidad = 2 (par)
+    iris.usarSanacion()
+    // resistencia 400 + 80*2 = 560
+    // durabilidad 600 + 60*2 = 720
+    assert.equals(560, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(720, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
+  
+  test "Iris entrena dos veces y usa sanación con capacidad impar otra vez" {
+    iris.getCapacidadDeSanacion()
+    iris.entrenar() // capacidad = 2
+    iris.entrenar() // capacidad = 3 (impar)
+    iris.usarSanacion()
+    assert.equals(550, escudoMagicoDeArcana.getmejoraResistencia()) // 400 + 150
+    assert.equals(700, escudoMagicoDeArcana.getmejoraDurabilidad()) // 600 + 100
+  }
+  
+  test "Iris entrena varias veces y la durabilidad no supera 1000" {
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar()
+    iris.entrenar() //entrena 10 veces en total
+    iris.getCapacidadDeSanacion()
+    iris.usarSanacion()
+    // resistencia 400 + 80*10 = 1200
+    // durabilidad 600 + 60*10 = 1200 → debería quedar en 1000 por el límite
+    assert.equals(1200, escudoMagicoDeArcana.getmejoraResistencia())
+    assert.equals(1000, escudoMagicoDeArcana.getmejoraDurabilidad())
+  }
+}
+
+describe "TEST BALTHAZAR" {
+  test "Balthazar puede ser reclutado al inicio, pero después de entrenar dos veces, su energía mágica aumenta a 65 y su poder baja a 29. En ese momento ya no puede ser reclutado." {
+    assert.that(academia.puedeSerReclutado(balthazar))
+    balthazar.entrenar()
+    balthazar.entrenar()
+    assert.equals(65, balthazar.energia())
+    assert.equals(29, balthazar.poder())
+    assert.notThat(academia.puedeSerReclutado(balthazar))
+  }
+}
+
+describe "test de academia" {
+  test "Mago no apto queda en lista de candidatos (Aldric)" {
+    // Aldric no cumple: entra a candidatos
+    academia.reclutar(aldric)
+    assert.that(academia.equipoDeMagos().isEmpty())
+    assert.equals(1, academia.listaDeCandidatos().size())
+    assert.that(academia.listaDeCandidatos().contains(aldric))
+  }
+  
+  test "Mago apto es adicionado al equipo (Iris)" {
+    // Iris cumple: entra al equipo
+    academia.reclutar(iris)
+    assert.equals(1, academia.equipoDeMagos().size())
+    assert.that(academia.equipoDeMagos().contains(iris))
+    assert.that(academia.listaDeCandidatos().isEmpty())
+  }
+  
+  test "Mago pasa de candidato a equipo si es re-evaluado" {
+    // 1. Aldric es candidato inicialmente
+    academia.reclutar(aldric)
+    // 2. Aldric entrena individualmente hasta cumplir (usando el Baston de Fuego)
+    aldric.usarBaston(bastonDeHielo) // Hielo (30+40=70)
+    aldric.entrenar()
+    // Fuego (70+60=130). Poder: 130/2 = 65 >= 30. Energia: 65+20 = 85 > 40.
+    
+    // 3. Academia lo recluta nuevamente (y lo saca de la lista de candidatos)
+    academia.reclutar(aldric)
+    
+    assert.that(academia.equipoDeMagos().contains(aldric))
+    assert.that(academia.listaDeCandidatos().isEmpty())
+    assert.equals(1, academia.equipoDeMagos().size())
+  }
+  
+  // --- Tests de Escenarios del Enunciado ---
+  test "Reclutar a los 4 magos y comprobar que Balthazar e Iris permanecen en el equipo" {
+    // Solo Iris y Balthazar cumplen inicialmente
+    academia.reclutar(iris)
+    academia.reclutar(balthazar)
+    academia.reclutar(selene)
+    academia.reclutar(aldric)
+    
+    assert.equals(2, academia.equipoDeMagos().size())
+    assert.equals(2, academia.listaDeCandidatos().size())
+    
+    // Comprobar la permanencia en el equipo
+    assert.that(academia.equipoDeMagos().contains(iris))
+    assert.that(academia.equipoDeMagos().contains(balthazar))
+    
+    // Comprobar que los otros están en la lista de candidatos
+    assert.that(academia.listaDeCandidatos().contains(selene))
+    assert.that(academia.listaDeCandidatos().contains(aldric))
+  }
+  
+  test "Escenario 2: Entrenamiento individual y validaciones complejas" {
+    // Preparación: Entrenar a Selene y Balthazar una vez (para que Selene pueda entrar)
+    // Selene: E:35, P:60 -> E:60, P:60 (entrena sin Luz Lunar)
+    selene.entrenar() 
+    
+    // Balthazar: E:45, P:35 -> E:55, P:32
+    balthazar.entrenar()
+    
+    // Estado de los magos al reclutar:
+    // Selene: E:60, P:60 -> OK
+    // Balthazar: E:55, P:32 -> OK
+    // Iris: E:80, P:35 -> OK
+    // Aldric: E:65, P:15 -> Candidato
+    
+    academia.reclutar(selene)
+    academia.reclutar(balthazar)
+    academia.reclutar(iris)
+    academia.reclutar(aldric)
+    
+    // Validaciones del Enunciado:
+    
+    // 1. Selene pertenece al equipo.
+    assert.that(academia.equipoDeMagos().contains(selene))
+    assert.equals(3, academia.equipoDeMagos().size())
+    
+    // 2. El poder total del equipo es igual a 127.
+    // Poderes: Selene(60) + Balthazar(32) + Iris(35) = 127
+    assert.equals(127, academia.poderTotalDelEquipo()) 
+    
+    // 3. El delta de la energía es 20.
+    // Energías: Selene(60), Balthazar(55), Iris(80)
+    
+    // Máx Poder: 60 (Selene). Mín Poder: 32 (Balthazar). Delta: |60 - 32| = 28. 
+
+    // El enunciado pide delta de la energía.
+    // Máx Energía: 80 (Iris). Mín Energía: 55 (Balthazar). Delta: |80 - 55| = 25. (Valor que da el enunciado, si está bien escrito)
+    //asumiendo que el enunciado está mal escrito y pide delta de poder, queda 28.
+    assert.equals(28, academia.deltaEnergia()) 
+    
+    // 4. La academia está en condiciones óptimas.
+    assert.that(academia.elEquipoEstaOptimo())
+  }
+  
+  test "Comprobar deltaEnergia usando poderes" {
+    // Equipo: Selene(P:60), Balthazar(P:35), Iris(P:35)
+    academia.reclutar(selene) 
+    academia.reclutar(iris) 
+    balthazar.entrenar() 
+    academia.reclutar(balthazar) 
+    selene.entrenar() 
+    academia.reclutar(selene) 
+
+    // Equipo: Selene(60), Iris(35), Balthazar(32)
+    // Max Poder: 60. Min Poder: 32. Delta: |60 - 32| = 28.
+    assert.equals(28, academia.deltaEnergia())
+  }
+  
+  test "Lista de poderes de magos con energia superior a 90" {
+
+    aldric.usarBaston(bastonDeFuego) //30 -> 90)
+    aldric.entrenar() // 65+20=85
+    aldric.entrenar() // 85+20=105
+    
+    // Reclutamos a Aldric  y a Iris 
+    academia.reclutar(aldric)
+    academia.reclutar(iris)
+    
+    // Solo Aldric tiene E > 90. Su poder es 75.
+    assert.equals([75], academia.listaDePoderes())
+  }
+
+  test "Lista de poderes de magos con energia superior a 90 (Lista Vacia)" {
+    // Reclutamos magos que NO cumplen el requisito de E > 90
+    academia.reclutar(balthazar) 
+    academia.reclutar(iris)      
+
+    // Ninguno de los dos tiene Energía > 90.
+    assert.equals([], academia.listaDePoderes()) 
+  }
+  
+  test "Entrenar un mago del equipo individualmente" {
+    academia.reclutar(balthazar)
+    
+    // Entrena y su estado cambia: P:35 -> 32, E:45 -> 55
+    academia.entrenarMagoDeEquipo(balthazar)
+    
+    assert.equals(32, balthazar.poder())
+    assert.equals(55, balthazar.energia())
+  }
+  
+  test "Entrenar a todo el equipo al mismo tiempo" {
+    //Selene (E:35, P:60), Balthazar (E:45, P:35), Iris (E:80, P:35)
+    selene.entrenar() 
+    academia.reclutar(selene)
+    academia.reclutar(balthazar)
+    academia.reclutar(iris)
+    
+    academia.entrenarEquipo()
+    
+    // Después del entrenamiento de equipo:
+    // Selene: E:60+25=85, P:60 (entrena sin Luz Lunar)
+    // Balthazar: E:45+10=55, P:35-3=32
+    // Iris: E:80, P:35 (su entrenamiento aumenta sanación)
+    assert.equals(85, selene.energia())
+    assert.equals(32, balthazar.poder())
+    assert.equals(80, iris.energia())
+  }
 }
