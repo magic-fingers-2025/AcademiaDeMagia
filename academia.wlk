@@ -38,7 +38,7 @@ object academia {
 
   // Entrenar a todos los del equipo
   method entrenarEquipo() {
-    equipo.forEach({ m => m.entrenar()})
+    equipoDeMagos.forEach({ m => m.entrenar()})
   }
   method poderTotalDelEquipo(){
     return equipoDeMagos.sum({m => m.poder()})
