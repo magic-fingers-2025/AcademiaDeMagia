@@ -61,7 +61,8 @@ object iris {
   // se inicio capacidadDeSanacion en 1 porque si inicia en 2 no se puede testear con lo que piden
   var capacidadDeSanacion = 1
   //pero cunado entrena
-   
+  method energia() = energia
+  method poder() = poder
   method entrenar() {
    // cada vez que entrena su capcidad de sanacion aumenta en 1
     capacidadDeSanacion += 1

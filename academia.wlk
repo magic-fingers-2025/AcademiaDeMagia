@@ -52,7 +52,7 @@ object academia {
   }
 
   method listaDePoderes(){
-    return equipoDeMagos.filter({m => m.poder()>90})
+    return equipoDeMagos.map({m => m.poder()}).filter({p => p > 90})
 
   }
 }
