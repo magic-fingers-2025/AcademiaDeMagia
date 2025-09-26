@@ -5,54 +5,54 @@ métodos: reclutar, poderTotal, deltaEnergia, ...
 
 import magos.*
 object academia {
-  const equipo = []
-  const candidatos = []
-  //verificar que su energía mágica sea mayor a 40 y su poder igual o superior a 30.
-  method cumpleConRequisitos(unMago) = self.cumpleConEnergiaApropiada(
-    unMago
-  ) && self.cumpleConPoderApropiado(unMago)
+  const equipoDeMagos = []
+  const listaDeCandidatos = []
   
-  // Reclutar un mago (si cumple entra al equipo, si no a candidatos)
-  method reclutar(unMago) {
-    if (self.cumpleConRequisitos(unMago)) equipo.add(unMago)
-    else candidatos.add(unMago)
+  // necesito los getters para consultar en los test
+  method equipoDeMagos() {
+    return equipoDeMagos    
+  }
+  method listaDeCandidatos() {
+    return listaDeCandidatos
   }
   
-  // Re-evaluar candidatos: los que cumplen pasan al equipo
-  method reevaluarCandidatos() {
-    var nuevosMiembros = []
-    nuevosMiembros = candidatos.filter({ c => self.cumpleConRequisitos(c)})
-    
-    nuevosMiembros.forEach({ c => equipo.add(c)})
-    
-    nuevosMiembros.forEach({ c => candidatos.remove(c)})
+  
+  method reclutar(unMago){
+    if (unMago.energia()>40 and unMago.poder()>= 30){
+      self.adicionarAlEquipo(unMago)
+    }
+    else{
+      listaDeCandidatos.add(unMago)
+    }
   }
-  
-  method cumpleConEnergiaApropiada(unMago) = unMago.energia() > 40
-  
-  method cumpleConPoderApropiado(unMago) = unMago.poder() >= 30
-  
+
+  method adicionarAlEquipo(unMago){
+    if (listaDeCandidatos.contains(unMago)){
+      listaDeCandidatos.remove(unMago)
+      equipoDeMagos.add(unMago)
+    }
+    else{
+      equipoDeMagos.add(unMago)
+    }
+  }
+
   // Entrenar a todos los del equipo
   method entrenarEquipo() {
     equipo.forEach({ m => m.entrenar()})
   }
-  
-  // Poder total del equipo
-  method poderTotal() = equipo.sum({ m => m.poder()})
-  
-  // ¿Condiciones óptimas? (nadie con energía < 45)
-  method condicionesOptimas() = equipo.all({ m => m.energia() >= 45})
-  
-  // Delta de energía (máxima - mínima, en valor absoluto)
-  method deltaEnergia() {
-    var magoConMaximaEnergia = equipo.max({ m => m.energia()})
-    var magoConMinimaEnergia = equipo.min({ m => m.energia()})
-    return (magoConMaximaEnergia.energia() - magoConMinimaEnergia.energia()).abs()
+  method poderTotalDelEquipo(){
+    return equipoDeMagos.sum({m => m.poder()})
   }
-  
-  // Lista de poderes de magos con energía > 90
-  method poderesDeMagosConAltaEnergia() {
-    var magosConMasDe90DeEnergia = equipo.filter({ m => m.energia() > 90 })
-    return magosConMasDe90DeEnergia.map({ m => m.poder()})
+  method elEquipoEstaOptimo(){
+    return not equipoDeMagos.any({m => m.energia() < 45})
+  }
+  method deltaEnergia(){
+    return (self.equipoDeMagos().max({m => m.poder()}) - self.equipoDeMagos().min({m => m.poder()})).abs()
+    
+  }
+
+  method listaDePoderes(){
+    return equipoDeMagos.filter({m => m.poder()>90})
+
   }
 }
